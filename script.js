@@ -6,7 +6,7 @@ const watchlist = new Set(); // Use a Set to avoid duplicates
 const watchlistContainer = document.getElementById('watchlist');
 
 // Function to fetch movies from the OMDb API
-const fetchMovies = async (query) => {
+async function fetchMovies(query) {
   const apiKey = 'd21e119d'; // Replace with your OMDb API key
   const url = `https://www.omdbapi.com/?s=${query}&apikey=${apiKey}`;
 
@@ -20,30 +20,30 @@ const fetchMovies = async (query) => {
   } else {
     movieResults.innerHTML = '<p class="no-results">No results found. Please try a different search.</p>';
   }
-};
+}
 
 // Function to save the watchlist to local storage
-const saveWatchlist = () => {
+function saveWatchlist() {
   localStorage.setItem('watchlist', JSON.stringify(Array.from(watchlist)));
-};
+}
 
 // Function to load the watchlist from local storage
-const loadWatchlist = () => {
+function loadWatchlist() {
   const storedWatchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
   storedWatchlist.forEach((movieID) => watchlist.add(movieID));
-};
+}
 
 // Function to remove a movie from the watchlist
-const removeFromWatchlist = (movieID) => {
+function removeFromWatchlist(movieID) {
   if (watchlist.has(movieID)) {
     watchlist.delete(movieID);
     saveWatchlist();
     updateWatchlistDisplay();
   }
-};
+}
 
 // Function to update the watchlist display
-const updateWatchlistDisplay = () => {
+async function updateWatchlistDisplay() {
   watchlistContainer.innerHTML = ''; // Clear previous watchlist
 
   if (watchlist.size === 0) {
@@ -70,16 +70,16 @@ const updateWatchlistDisplay = () => {
       watchlistContainer.appendChild(watchlistCard);
     });
   }
-};
+}
 
 // Function to add a movie to the watchlist
-const addToWatchlist = (movie) => {
+function addToWatchlist(movie) {
   if (!watchlist.has(movie.imdbID)) {
     watchlist.add(movie.imdbID);
     saveWatchlist();
     updateWatchlistDisplay();
   }
-};
+}
 
 // Function to handle the 'Add to Watchlist' button click
 const handleAddToWatchlist = (movie) => {
@@ -87,7 +87,7 @@ const handleAddToWatchlist = (movie) => {
 };
 
 // Function to display movies in the results section
-const displayMovies = (movies) => {
+function displayMovies(movies) {
   movieResults.innerHTML = ''; // Clear previous results
 
   // Loop through each movie and create a card
@@ -109,7 +109,7 @@ const displayMovies = (movies) => {
 
     movieResults.appendChild(movieCard);
   });
-};
+}
 
 // Event listener for the search form submission
 searchForm.addEventListener('submit', (event) => {
