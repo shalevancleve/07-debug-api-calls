@@ -50,7 +50,7 @@ async function updateWatchlistDisplay() {
     watchlistContainer.innerHTML = '<p>Your watchlist is empty. Search for movies to add!</p>';
   } else {
     watchlist.forEach(async (movieID) => {
-      const apiKey = 'd21e119d'; // Replace with your OMDb API key
+      const apiKey = 'your-api-key'; // Replace with your OMDb API key
       const url = `https://www.omdbapi.com/?i=${movieID}&apikey=${apiKey}`;
       const response = await fetch(url);
       const movie = await response.json();
