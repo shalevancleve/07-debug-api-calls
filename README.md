@@ -1,1 +1,2 @@
-# 07-debug-api-calls
+# 🍿 Big Movie Weekend App (Debug)
+To get started, create a new Codespace from this repo.
